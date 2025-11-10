@@ -1,0 +1,20 @@
+name: Random KSM Test
+on: 
+  workflow_dispatch:
+
+jobs:
+  ksm-test-random:
+    runs-on: ubuntu-latest
+    name: Build with Keeper secrets
+    steps:
+    
+      - name: Retrive secrets from keeper
+        id: ksecrets
+        uses: Keeper-Security/ksm-action@master
+        with:
+          keeper-secret-config: ${{ secrets.DEMO_SECRET }}
+          secrets: hi53l1bIDiUIHlRuHDGFGg/field/password > pwd
+            
+      - name: View Password
+        run: | 
+          echo "pwd: ${{ steps.ksecrets.outputs.pwd }}"
